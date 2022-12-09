@@ -5,10 +5,23 @@ const mongoose = require('mongoose')
 require('dotenv/config')
 
 const bodyParser = require('body-parser')
+
+// TEAMS
 const teamsRoute = require('./routes/teams')
 
 app.use(bodyParser.json())
 app.use('/teams', teamsRoute)
+
+
+// GAMES
+const gamesRoute = require('./routes/games')
+
+app.use(bodyParser.json())
+app.use('/games', gamesRoute)
+
+
+
+// MAIN
 
 app.get('/', (req, res) => {
     res.send('Homepage')

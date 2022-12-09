@@ -50,7 +50,6 @@ router.get('/:groupId', async (req, res) => {
 })
 
 // GET GROUP BY TEAM 1
-
 router.get('/:team1', async (req, res) => {
     try {
         const getGroupByT1 = await group.findOne({team1:req.params.team1})
