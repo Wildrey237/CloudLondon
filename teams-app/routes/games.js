@@ -34,6 +34,7 @@ router.get('/', async (req, res) => {
 
 
 // GET MATCH BY ID
+/*
 router.get('/:matchId', async (req, res) => {
     try {
         const getMatchesById = await match.findById(req.params.matchId)
@@ -41,11 +42,20 @@ router.get('/:matchId', async (req, res) => {
     } catch (err) {
         res.send({message:err})
     }
+})*/
+
+router.get('/:groupLetter', async (req, res) => {
+    try {
+        const getMatches = await match.findOne({group:req.params.groupLetter})
+        res.send(getMatches)
+    } catch (err) {
+        res.send({message:err})
+    }
 })
 
 
 // UPDATE MATCH
-router.patch('/:matchId', async (req, res) => {
+router.patch('/:groupLetter', async (req, res) => {
     const matchData = new match({
         group:req.body.group,
         team1:req.body.team1,
@@ -55,7 +65,7 @@ router.patch('/:matchId', async (req, res) => {
 
     try {
         const updateMatch = await match.updateOne(
-            {_id:req.params.groupId},
+            {_letter:req.params.groupLetter},
             {$set:{
                 group:req.body.group,
                 team1:req.body.team1,
@@ -71,9 +81,9 @@ router.patch('/:matchId', async (req, res) => {
 
 
 // DELETE
-router.delete('/:matchId', async (req, res) => {
+router.delete('/:matchLetter', async (req, res) => {
     try {
-        const deleteMatch = await match.deleteOne({_id:req.params.matchId})
+        const deleteMatch = await match.deleteOne({_letter:req.params.matchLetter})
         res.send(deleteMatch)
     } catch (err) {
         res.send({message:err})
